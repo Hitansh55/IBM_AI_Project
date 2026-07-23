@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ ./
 
 # Copy pre-built frontend directly (it will be included in the zip)
-COPY frontend/dist/ ./static/
+COPY frontend/dist/ ./dist/
 
 # Expose port
 EXPOSE 8000
