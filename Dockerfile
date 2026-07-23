@@ -1,12 +1,4 @@
-# Build Frontend
-FROM node:18-alpine AS frontend-builder
-WORKDIR /app/frontend
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend/ ./
-RUN npm run build
-
-# Build Backend & Combine
+# Build Backend & Serve Pre-built Frontend
 FROM python:3.9-slim
 WORKDIR /app
 
@@ -17,8 +9,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY backend/ ./
 
-# Copy frontend build to static directory in backend
-COPY --from=frontend-builder /app/frontend/dist ./static
+# Copy pre-built frontend directly (it will be included in the zip)
+COPY frontend/dist/ ./static/
 
 # Expose port
 EXPOSE 8000
