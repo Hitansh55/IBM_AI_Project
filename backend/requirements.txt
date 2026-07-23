@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pypdf
+google-generativeai
+python-dotenv
+python-multipart
+sse-starlette
+pydantic
+python-docx
+Pillow
+groq
+supabase
+python-jose
+cryptography
+slowapi
