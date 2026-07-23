@@ -162,8 +162,17 @@ async def generate_content(request: Request, req: GenerateRequest, auth_data = D
         raise HTTPException(status_code=500, detail="An internal error occurred. Please try again.")
 
 # Serve React Frontend in Production (Must be at the bottom to avoid shadowing API routes)
+from fastapi.responses import FileResponse
+
 if os.path.isdir("dist"):
-    app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        # If the requested file exists, serve it
+        file_path = os.path.join("dist", full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        # Otherwise, fallback to index.html for React Router
+        return FileResponse(os.path.join("dist", "index.html"))
 else:
     @app.get("/")
     def read_root():
