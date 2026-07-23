@@ -520,7 +520,7 @@ function App() {
 
             <div className="user-profile" onClick={handleOpenProfile}>
               <div className="avatar">
-                {userAvatar.startsWith('data:') ? <img src={userAvatar} alt="Avatar" style={{width:'100%', height:'100%', borderRadius:'50%', objectFit:'cover'}} /> : userAvatar}
+                {(userAvatar.startsWith('data:') || userAvatar.startsWith('http')) ? <img src={userAvatar} alt="Avatar" style={{width:'100%', height:'100%', borderRadius:'50%', objectFit:'cover'}} /> : userAvatar}
               </div>
               <div className="user-info">
                 <div className="name">{userName}</div>
@@ -550,8 +550,8 @@ function App() {
              </div>
              
              <div className="user-profile collapsed-profile has-tooltip" data-tooltip="Profile" onClick={handleOpenProfile}>
-               <div className="avatar" style={{fontSize: userAvatar.startsWith('data:') ? '0' : undefined}}>
-                 {userAvatar.startsWith('data:') ? <img src={userAvatar} alt="Avatar" style={{width:'100%', height:'100%', borderRadius:'50%', objectFit:'cover'}} /> : userAvatar}
+               <div className="avatar" style={{fontSize: (userAvatar.startsWith('data:') || userAvatar.startsWith('http')) ? '0' : undefined}}>
+                 {(userAvatar.startsWith('data:') || userAvatar.startsWith('http')) ? <img src={userAvatar} alt="Avatar" style={{width:'100%', height:'100%', borderRadius:'50%', objectFit:'cover'}} /> : userAvatar}
                </div>
              </div>
           </div>
@@ -686,7 +686,7 @@ function App() {
                 </div>
                 <div className="avatar-upload-wrapper">
                   <div className="avatar-preview">
-                    {tempUserAvatar.startsWith('data:') ? <img src={tempUserAvatar} alt="Avatar" /> : tempUserAvatar}
+                    {(tempUserAvatar.startsWith('data:') || tempUserAvatar.startsWith('http')) ? <img src={tempUserAvatar} alt="Avatar" /> : tempUserAvatar}
                   </div>
                   <label className="upload-btn">
                     Upload new
